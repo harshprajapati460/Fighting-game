@@ -32,7 +32,7 @@ class Sprite{
     c.fillRect(this.position.x,this.position.y,this.width,this.height)
     
     // Attack Box
-   if(player.isAttacking || enemy.isAttacking){
+   if(this.isAttacking ){
      c.fillStyle = 'green'
     c.fillRect(
         this.attackBox.position.x,
@@ -41,6 +41,7 @@ class Sprite{
         this.attackBox.height
          )
    }
+   
 
 }
  update(){
@@ -206,7 +207,7 @@ window.addEventListener('keydown',(event)=> {
             break;
         case 'ArrowDown':
             enemy.attack()
-            break;    
+            break    
 
 
     }

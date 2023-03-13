@@ -131,13 +131,9 @@ function rectangularCollision({rectangle1,rectangle2}){
        rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height  
     )
 }
-let timer = 4
-function decreaseTimer(){
-    setTimeout(decreaseTimer,1000)
-    if(timer > 0) timer--
-    document.querySelector('#timer').innerHTML = timer
-
-    if(timer === 0){
+function determineWinner({player,enemy,timerId}){   
+    clearTimeout(timerId)
+    
         document.querySelector('#displayText').style.display = 'flex'
 
         if(player.health === enemy.health){
@@ -148,10 +144,24 @@ function decreaseTimer(){
         }
         else if(player.health < enemy.health){
             document.querySelector('#displayText').innerHTML = 'Enemy Wins'
-        }
         
     }
 }
+
+let timer = 60 
+let timerId
+function decreaseTimer(){
+    
+   timerId = setTimeout(decreaseTimer,1000)
+    if(timer > 0) timer--
+    document.querySelector('#timer').innerHTML = timer
+
+    if(timer === 0){
+        determineWinner({player,enemy,timerId})
+    }
+}
+   
+
 decreaseTimer()
 function animate(){
     
@@ -188,7 +198,7 @@ function animate(){
         rectangle2:enemy}) && 
         player.isAttacking){
             player.isAttacking = false
-         enemy.health -= 15
+         enemy.health -= 20
         document.querySelector('#enemyHealth').style.width = enemy.health + '%'
     }
     if( rectangularCollision({
@@ -196,8 +206,13 @@ function animate(){
         rectangle2:player}) && 
         enemy.isAttacking){
         enemy.isAttacking = false
-        player.health -= 15
+        player.health -= 20
        document.querySelector('#playerHealth').style.width = player.health + '%'
+    }
+    //End game on th basis of health
+
+    if(enemy.health <= 0 || player.health <= 0){
+        determineWinner({   player,enemy,timerId}) 
     }
 }
 

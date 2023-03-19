@@ -1,9 +1,9 @@
-function rectangularCollision({rectangle1,rectangle2}){
+function rectangularCollision({rect1,rect2}){
     return (
-        rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x && 
-        rectangle1.attackBox.position.x <= rectangle2.attackBox.position.x + rectangle2.width && 
-       rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y && 
-       rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height  
+        rect1.attackBox.position.x + rect1.attackBox.width >= rect2.position.x && 
+        rect1.attackBox.position.x <= rect2.attackBox.position.x + rect2.width && 
+       rect1.attackBox.position.y + rect1.attackBox.height >= rect2.position.y && 
+       rect1.attackBox.position.y <= rect2.position.y + rect2.height  
     )
 }
 function determineWinner({player,enemy,timerId}){   
@@ -23,7 +23,7 @@ function determineWinner({player,enemy,timerId}){
     }
 }
 
-let timer = 60 
+let timer = 10
 let timerId
 function decreaseTimer(){
     
